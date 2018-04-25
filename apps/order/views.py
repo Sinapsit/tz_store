@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.views import Response
 
-# Create your views here.
+
+class OrderView(APIView):
+    def get(self, request):
+        return Response({})
