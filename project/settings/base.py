@@ -49,7 +49,9 @@ CONTRIB_APPS = [
     'django.contrib.staticfiles',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    'order',
+]
 
 EXTERNAL_APPS = []
 
@@ -136,3 +138,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DEFAULT_CURRENCY = 'USD'
