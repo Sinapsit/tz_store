@@ -50,7 +50,7 @@ CONTRIB_APPS = [
 ]
 
 PROJECT_APPS = [
-    'order',
+    'order.apps.OrderConfig'
 ]
 
 EXTERNAL_APPS = [
