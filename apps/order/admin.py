@@ -9,6 +9,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = [
         'number',
         'user',
+        'status',
         'created',
         'modified',
         'synced'
