@@ -14,7 +14,7 @@ class BaseConnector(object):
             'status': data['status'],
         }
         order.remote_sync = True
-        url = f'{self.server_url}/order/item/{order.number}'
+        url = f'{self.server_url}/order/item/{order.number}/'
         resp = requests.patch(url, data=data_status)
 
     def create_order(self):
