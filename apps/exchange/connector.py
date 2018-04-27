@@ -5,24 +5,30 @@ from order.models import Order
 class BaseConnector(object):
     def __init__(self, instance, server_url):
         self.server_url = server_url
-        self.instance_id = instance
+        self.instance = Order.objects.get(id=instance)
 
     def sync_status(self):
-        order = Order.objects.get(id=self.instance_id)
-        data = self.get_serializer(order)
+        data = self.get_serializer(self.instance)
         data_status = {
             'status': data['status'],
         }
-        order.remote_sync = True
         url = f'{self.server_url}/order/item/{order.number}/'
-        resp = requests.patch(url, data=data_status)
+        self.send(url, data_status)
 
     def create_order(self):
         url = f'{self.server_url}/order/create/'
-        order = Order.objects.get(id=self.instance_id)
-        data = self.get_serializer(order)
-        data.pop('id')
+        data = self.get_serializer(self.instance)
+        for i in ['id', 'synced']:
+            del data[i]
+        self.send(url, data)
+
+    def send(self, url, data,):
         resp = requests.post(url, data=data)
+        if resp.status_code == 200 or resp.status_code == 201:
+            self.instance.synced = True
+        else:
+            self.instance.synced = False
+        self.instance.save()
 
     @staticmethod
     def get_serializer(instance):

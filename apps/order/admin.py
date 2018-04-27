@@ -11,6 +11,7 @@ class OrderAdmin(admin.ModelAdmin):
         'user',
         'created',
         'modified',
+        'synced'
     ]
 
     def save_model(self, request, obj, form, change):
