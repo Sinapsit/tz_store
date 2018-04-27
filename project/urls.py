@@ -19,7 +19,7 @@ from rest_framework_swagger.views import get_swagger_view
 from django.conf.urls.static import static
 from django.conf import settings
 
-api_schema_view = get_swagger_view(title='Stor API')
+api_schema_view = get_swagger_view(title='Store API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
