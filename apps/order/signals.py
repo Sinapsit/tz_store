@@ -12,6 +12,5 @@ def save_order(sender, instance, **kwargs):
         connector = BaseConnector(instance.id, server.url)
         if kwargs["created"]:
             connector.create_order()
-        else:
-            connector.sync_status()
+
 

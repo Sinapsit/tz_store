@@ -10,7 +10,10 @@ class BaseConnector(object):
     def sync_status(self):
         order = Order.objects.get(id=self.instance_id)
         data = self.get_serializer(order)
-        data_status = data['status']
+        data_status = {
+            'status': data['status'],
+        }
+        order.remote_sync = True
         url = f'{self.server_url}/order/item/{order.number}'
         resp = requests.patch(url, data=data_status)
 
